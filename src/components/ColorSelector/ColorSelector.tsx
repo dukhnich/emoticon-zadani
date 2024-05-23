@@ -1,23 +1,21 @@
-import {Color, colorsData} from '../../data';
+import { colorsData } from "../../data";
+import { useSettings } from "../../context/setting-context";
 
-const ColorSelector:React.FC = () => {
+const ColorSelector: React.FC = () => {
+  const { setSetting } = useSettings();
 
-	const handleClick = (item:Color) => {
-		console.log('color', item.id);
-	}
-
-	return (
-		<div className="items">
-			{colorsData.map(color =>
-				<div
-					className='item'
-					key={color.id}
-					style={{ backgroundColor: color.value}}
-					onClick={() => { handleClick(color) }}
-					/>
-			)}
-		</div>
-	);
-}
+  return (
+    <div className="items">
+      {colorsData.map((color) => (
+        <div
+          className="item"
+          key={color.id}
+          style={{ backgroundColor: color.value }}
+          onClick={() => setSetting({ color: color.id })}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default ColorSelector;

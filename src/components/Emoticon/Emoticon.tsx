@@ -1,16 +1,23 @@
-import './style.css';
+import "./style.css";
 
-import eyesImg from '../../img/eyes2.svg';
-import mouthImg from '../../img/mouth2.svg';
+import { useSettings } from "../../context/setting-context";
+import { colorsData } from "../../data";
 
-const Emoticon:React.FC = () => {
+const Emoticon: React.FC = () => {
+  const { eyes, mouth, color } = useSettings();
 
-	return (
-		<div className='emoticon' style={{ backgroundColor: '#ff2e12' }}>
-			<img className="emoticon__eyes" src={eyesImg} />
-			<img className="emoticon__mouth" src={mouthImg} />
-		</div>
-	);
-}
+  return (
+    <div
+      className="emoticon"
+      style={{
+        backgroundColor:
+          colorsData.find((colorObj) => colorObj.id === color)?.value || "red",
+      }}
+    >
+      <img className="emoticon__eyes" src={`src/img/eyes${eyes}.svg`} />
+      <img className="emoticon__mouth" src={`src/img/mouth${mouth}.svg`} />
+    </div>
+  );
+};
 
 export default Emoticon;
